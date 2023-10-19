@@ -19,21 +19,30 @@ class PackageController extends Controller
     {
         // Validasi request JSON
         $validator = Validator::make($request->all(), [
+            'transaction_id' => 'required|string|unique:packages,transaction_id,',
             'customer_name' => 'required|string',
             'customer_code' => 'required|string',
-            'transaction_amount' => 'required|integer',
-            'transaction_discount' => 'required|integer',
-            'transaction_additional_field' => 'nullable',
-            'transaction_payment_type' => 'required|integer',
+            'transaction_amount' => 'required|numeric',
+            'transaction_discount' => 'required|numeric',
+            'transaction_additional_field' => 'nullable|string',
+            'transaction_payment_type' => 'required|string',
             'transaction_state' => 'required|string',
             'transaction_code' => 'required|string',
             'transaction_order' => 'required|integer',
             'location_id' => 'required|string',
+            'organization_id' => 'required|integer',
+            'created_at' => 'required|date',
+            'updated_at' => 'required|date',
             'transaction_payment_type_name' => 'required|string',
-            'transaction_cash_amount' => 'required|int',
-            'transaction_cash_change' => 'required|int',
-            'connote_id' => 'required|uuid',
-            'custom_field' => 'nullable',
+            'transaction_cash_amount' => 'required|numeric',
+            'transaction_cash_change' => 'required|numeric',
+            'customer_attribute' => 'required|array',
+            'connote' => 'required|array',
+            'origin_data' => 'required|array',
+            'destination_data' => 'required|array',
+            'koli_data' => 'required|array',
+            'custom_field' => 'required|array',
+            'currentLocation' => 'required|array',
         ]);
 
         if ($validator->fails()) {
